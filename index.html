@@ -43,7 +43,21 @@
   </div>
 
   <script>
-    var currentAudio = null; // Keep track of the currently playing audio
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").then(
+          function(regist) {
+            console.log("function registrated", regist.scope)
+          }, function(err) {
+            console.log({"error": err})
+          }
+        )
+      })
+    }
+  </script>
+
+  <script>
+  var currentAudio = null; // Keep track of the currently playing audio
 
   function playAudio(audioId) {
   var audio = document.getElementById(audioId);
@@ -63,7 +77,6 @@
     currentAudio = null;
   }
 }
-
   </script>
 
 </body>
